@@ -6,5 +6,6 @@ urlpatterns = [
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('register/', views.register_user, name='register'),
-    path('patient-dashboard/', views.patient_dashboard, name='patient_dashboard'),
+    path('recommendation/', views.recommendation_view, name='recommendation'),  
+    # path('recommendation/results/', views.recommendation_results, name='recommendation_results'),  # Optional: if results are handled separately
 ]

@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block content %}
-<div class="hero-image" style="background-image: url('{% static 'images/hero_image.jpg' %}'); height: 100vh; background-size: cover; background-position: center;">
-    <div class="text-center text-white d-flex justify-content-center align-items-center" style="height: 100%;">
+<div class="hero-image" style="height: 100vh; background: #f0f0f0;">
+    <div class="text-center text-black d-flex justify-content-center align-items-center" style="height: 100%;">
         <div>
-            <h1>Welcome to MediConnect!</h1>
+            <h1>Welcome to PocketDoc!</h1>
             <p class="lead">Explore our services and learn more about us.</p>
             {% if not user.is_authenticated %}
             <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
             {% else %}
-            <a href="{% url 'patient_dashboard' %}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+            <a href="{% url 'recommendation' %}" class="btn btn-primary btn-lg">Go to Dashboard</a>
             {% endif %}
         </div>
     </div>
@@ -34,14 +34,3 @@
     </div>
 </div>
 {% endblock %}
-
-<style>
-.hero-image {
-    animation: fade-in 1s;
-}
-
-@keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-</style>

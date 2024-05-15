@@ -16,6 +16,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+OPENAI_API_KEY = 'sk-proj-xAFeSKWKDVvG909uBTAET3BlbkFJljswCYeEOszPpHz25KnU'
+
+PINECONE_API_KEY = '152fee8a-6b70-4d7b-8a22-00d59ded44e0'
+PINECONE_ENVIRONMENT = 'us-west1-gcp'
+ARXIV_SCRAPER_CATEGORY = 'physics:med-ph'
+ARXIV_SCRAPER_DATE_FROM = '2023-05-01'
+ARXIV_SCRAPER_DATE_UNTIL = '2023-05-14'
+SENTENCE_TRANSFORMER_MODEL = 'all-MiniLM-L6-v2'
+
 
 # Application definition
 
@@ -65,7 +77,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': '152_db',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'davyjones441',
         'HOST': 'localhost',
         'PORT': '3306',
     }

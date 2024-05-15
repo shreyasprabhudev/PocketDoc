@@ -41,19 +41,8 @@ class AddUserInformationForm(forms.ModelForm):
             'zipcode': forms.TextInput(attrs={"placeholder": "Zipcode", "class": "form-control"}),
         }
 
-class DoctorForm(forms.ModelForm):
-    class Meta:
-        model = Doctor
-        fields = ['specialty', 'available']
-        widgets = {
-            'specialty': forms.TextInput(attrs={"placeholder": "Specialty", "class": "form-control"}),
-            'available': forms.CheckboxInput(attrs={"class": "form-check-input"}),
-        }
-
-class PatientForm(forms.ModelForm):
-    class Meta:
-        model = Patient
-        fields = ['date_of_birth']
-        widgets = {
-            'date_of_birth': forms.DateInput(attrs={"placeholder": "YYYY-MM-DD", "class": "form-control", "type": "date"}),
-        }
+class RecommendationForm(forms.Form):
+    age = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Age'}))
+    symptoms = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Describe your symptoms'}))
+    medical_conditions = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'List any known medical conditions'}))
+    exercise = forms.CharField(required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Describe your weekly exercise routine'}))

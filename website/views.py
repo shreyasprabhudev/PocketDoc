@@ -1,32 +1,36 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, DoctorForm, PatientForm
-from .models import UserInformation, Doctor, Patient
+from django.contrib.auth.decorators import login_required
+from backend import settings
+from .forms import RecommendationForm, SignUpForm
+from .models import UserInformation
+from openai import OpenAI
+from pinecone import Pinecone
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_pinecone import PineconeVectorStore
+from langchain_openai.chat_models import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
+from langchain.prompts import ChatPromptTemplate
+from .update_arxiv_papers import embed_and_upload_to_pinecone
+import os
 
 def home(request):
     if request.user.is_authenticated:
-        return redirect('patient_dashboard')
+        return redirect('recommendation')
     else:
         return render(request, 'home.html')
 
-    
-def patient_dashboard(request):
-    if not request.user.is_authenticated:
-        messages.error(request, "You need to log in to access the dashboard.")
-        return redirect('login')
-    return render(request, 'patient_dashboard.html')
-
 def login_user(request):
     if request.user.is_authenticated:
-        return redirect('patient_dashboard')
+        return redirect('recommendation')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('patient_dashboard')
+            return redirect('recommendation')
         else:
             messages.error(request, "Invalid username or password.")
     return render(request, 'login.html')
@@ -41,7 +45,6 @@ def register_user(request):
         user_form = SignUpForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save()
-            is_doctor = request.POST.get('is_doctor', 'off') == 'on'
             user_info = UserInformation.objects.create(
                 user=new_user,
                 first_name=user_form.cleaned_data['first_name'],
@@ -52,35 +55,83 @@ def register_user(request):
                 city=user_form.cleaned_data['city'],
                 state=user_form.cleaned_data['state'],
                 zipcode=user_form.cleaned_data['zipcode'],
-                is_doctor=is_doctor
             )
             login(request, new_user)
-            return redirect('patient_dashboard')
+            return redirect('recommendation')
         else:
             messages.error(request, user_form.errors)
     else:
         user_form = SignUpForm()
     return render(request, 'register.html', {'form': user_form})
 
+@login_required
+def recommendation_view(request):
+    if request.method == 'POST':
+        form = RecommendationForm(request.POST)
+        if form.is_valid():
+            patient_data = {
+                'age': form.cleaned_data.get('age'),
+                'symptoms': form.cleaned_data.get('symptoms'),
+                'medical_conditions': form.cleaned_data.get('medical_conditions'),
+                'exercise': form.cleaned_data.get('exercise', 'Not specified')
+            }
 
-def user_profile(request, user_id):
-    if request.user.is_authenticated:
-        user_profile = get_object_or_404(UserInformation, user_id=user_id)
-        if hasattr(request.user, 'doctor'):
-            form = DoctorForm(instance=request.user.doctor)
-        elif hasattr(request.user, 'patient'):
-            form = PatientForm(instance=request.user.patient)
-        else:
-            return redirect('home')
+            prompt_template = """
+            Based on the patient details: Age - {age}, Symptoms - {symptoms}, Medical Conditions - {medical_conditions}, 
+            and the following research context: {context}.
 
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                messages.success(request, "Profile Updated Successfully!")
-                return redirect('profile', user_id=user_id)
+            Please suggest appropriate medical treatments. Include the titles and direct quotes from the research papers you referenced, if necessary.
+            """
 
-        return render(request, 'profile.html', {'form': form, 'profile': user_profile})
+            os.environ["PINECONE_API_KEY"] = settings.PINECONE_API_KEY
+            pc = Pinecone(api_key=settings.PINECONE_API_KEY)
+            embeddings = OpenAIEmbeddings(openai_api_key=settings.OPENAI_API_KEY)
+            index = PineconeVectorStore.from_existing_index(index_name="pocketdoc", embedding=embeddings)
+
+            query_text = f"Age: {patient_data['age']}, Symptoms: {patient_data['symptoms']}, Medical conditions: {patient_data['medical_conditions']}"
+            retriever = index.as_retriever()
+            result = retriever.get_relevant_documents(query_text)
+
+            context_text = "\n".join([f"Title: {res.metadata['title']}\nQuote: {res.page_content}" for res in result])
+            prompt = prompt_template.format(age=patient_data['age'], symptoms=patient_data['symptoms'],
+                                            medical_conditions=patient_data['medical_conditions'],
+                                            context=context_text)
+
+            client = OpenAI(api_key=settings.OPENAI_API_KEY)
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a providing valuable medical advice to patients."},
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            recommendation = response.choices[0].message.content.strip()
+            references = "\n".join([f"{i+1}. {res.metadata.get('title', 'No title')}\n   Quote: {res.page_content}" for i, res in enumerate(result)])
+
+            formatted_recommendation = f"{recommendation}\n\nReferences:\n{references}"
+            return render(request, 'recommendation_results.html', {'recommendation': formatted_recommendation})
+
     else:
-        messages.error(request, "You Must Be Logged In To View This Page...")
-        return redirect('home')
+        form = RecommendationForm()
 
+    return render(request, 'recommendation.html', {'form': form})
+
+def generate_embeddings(text):
+    openai.api_key = settings.OPENAI_API_KEY
+
+    response = openai.Embedding.create(
+        model="text-embedding-ada-002",
+        input=[text]
+    )
+    embeddings = response['data'][0]['embedding']
+    return embeddings
+
+def query_pinecone(query_text):
+    pc = Pinecone(api_key=settings.PINECONE_API_KEY)
+    pinecone = embed_and_upload_to_pinecone(query_text, settings.OPENAI_API_KEY, settings.PINECONE_API_KEY, "pocketdoc")
+    index = pinecone.Index('pocketdoc')
+
+    query_embedding = generate_embeddings(query_text)
+    result = index.query([query_embedding], top_k=5)
+
+    return result['matches']

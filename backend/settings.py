@@ -1,5 +1,8 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,9 +22,9 @@ ALLOWED_HOSTS = []
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
-OPENAI_API_KEY = 'sk-proj-xAFeSKWKDVvG909uBTAET3BlbkFJljswCYeEOszPpHz25KnU'
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-PINECONE_API_KEY = '152fee8a-6b70-4d7b-8a22-00d59ded44e0'
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENVIRONMENT = 'us-west1-gcp'
 ARXIV_SCRAPER_CATEGORY = 'physics:med-ph'
 ARXIV_SCRAPER_DATE_FROM = '2023-05-01'

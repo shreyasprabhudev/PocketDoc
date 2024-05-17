@@ -1,9 +1,39 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>Patient Recommendation Form</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div
+  style="
+    padding-bottom: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  "
+>
+  <h1>Medication Recommendation Questionnaire</h1>
+  <form
+    method="POST"
+    action="{% url 'recommendation' %}"
+    id="recommendationForm"
+  >
+    {% csrf_token %} {{ form.as_p }}
+    <div class="text-center mt-3">
+      <button
+        type="submit"
+        class="btn btn-success"
+        style="transition: transform 0.3s"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %} {% block extra_js %}
+<script>
+  const btn = document.querySelector(".btn-success");
+  btn.onmouseover = function () {
+    btn.style.transform = "scale(1.1)";
+  };
+  btn.onmouseout = function () {
+    btn.style.transform = "scale(1)";
+  };
+</script>
 {% endblock %}

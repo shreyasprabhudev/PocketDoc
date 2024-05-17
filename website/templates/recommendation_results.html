@@ -1,5 +1,20 @@
-{% extends 'base.html' %}
-{% block content %}
-<h2>Recommendation Results</h2>
-<pre>{{ recommendation }}</pre>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">PocketDoc Recommendation Results</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text" style="white-space: pre-wrap">{{ recommendation }}</p>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a
+      href="{% url 'recommendation' %}"
+      class="btn btn-primary"
+      style="border-radius: 25px"
+      >Return to Questionnaire</a
+    >
+  </div>
+</div>
 {% endblock %}

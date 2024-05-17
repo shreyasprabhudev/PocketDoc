@@ -9,9 +9,6 @@ from openai import OpenAI
 from pinecone import Pinecone
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain_openai.chat_models import ChatOpenAI
-from langchain_core.output_parsers import StrOutputParser
-from langchain.prompts import ChatPromptTemplate
 from .update_arxiv_papers import embed_and_upload_to_pinecone
 import os
 
@@ -65,6 +62,14 @@ def register_user(request):
     return render(request, 'register.html', {'form': user_form})
 
 @login_required
+def recommendation_results(request):
+    recommendation = request.session.get('recommendation', None)
+    if recommendation:
+        return render(request, 'recommendation_results.html', {'recommendation': recommendation})
+    else:
+        return redirect('recommendation')
+
+@login_required
 def recommendation_view(request):
     if request.method == 'POST':
         form = RecommendationForm(request.POST)
@@ -109,7 +114,9 @@ def recommendation_view(request):
             references = "\n".join([f"{i+1}. {res.metadata.get('title', 'No title')}\n   Quote: {res.page_content}" for i, res in enumerate(result)])
 
             formatted_recommendation = f"{recommendation}\n\nReferences:\n{references}"
-            return render(request, 'recommendation_results.html', {'recommendation': formatted_recommendation})
+            request.session['recommendation'] = formatted_recommendation
+            return redirect('recommendation_results')
+
 
     else:
         form = RecommendationForm()

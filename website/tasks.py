@@ -6,7 +6,6 @@ import arxivscraper
 
 @shared_task
 def fetch_and_index_papers():
-    # Initialize Pinecone
     pinecone.init(api_key=settings.PINECONE_API_KEY, environment=settings.PINECONE_ENVIRONMENT)
     index = pinecone.Index('arxiv-papers')
 

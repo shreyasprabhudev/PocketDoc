@@ -1,0 +1,182 @@
+[
+    {
+        "request_number": 1,
+        "scenario": "common",
+        "response_time": 6.441040754318237,
+        "response_content": "Based on the patient's symptoms of headache and dizziness, alongside their medical condition of hypertension, the appropriate medical treatments would be as follows:\n\n1. Headache and Dizziness:\n   - F"
+    },
+    {
+        "request_number": 2,
+        "scenario": "common",
+        "response_time": 5.748911142349243,
+        "response_content": "Based on the patient's symptoms of cough, fever, and medical condition of diabetes, it is important to consider the possibility of COVID-19 infection. Given the research context of \"Decreased serum vi"
+    },
+    {
+        "request_number": 3,
+        "scenario": "common",
+        "response_time": 5.811645984649658,
+        "response_content": "Based on the patient's age, symptoms, and medical conditions (coronary artery disease), it is important to consider the possibility of a cardiac event such as a heart attack or angina. It is crucial f"
+    },
+    {
+        "request_number": 4,
+        "scenario": "common",
+        "response_time": 5.1886842250823975,
+        "response_content": "Based on the patient's information provided (age 25, symptoms of abdominal pain and nausea, and a history of irritable bowel syndrome), the appropriate medical treatment would be to focus on managing "
+    },
+    {
+        "request_number": 5,
+        "scenario": "common",
+        "response_time": 8.027964353561401,
+        "response_content": "Based on the patient details and the research context provided, for a 50-year-old patient with rheumatoid arthritis experiencing joint pain and swelling, the following medical treatments may be approp"
+    },
+    {
+        "request_number": 6,
+        "scenario": "common",
+        "response_time": 6.265622138977051,
+        "response_content": "Based on the patient's age of 35 and symptoms of skin rash and itching, along with a history of eczema, the patient may benefit from treatments targeting the underlying inflammation and immune respons"
+    },
+    {
+        "request_number": 7,
+        "scenario": "common",
+        "response_time": 14.094506978988647,
+        "response_content": "Based on the patient's age (70), symptoms (memory loss, confusion), and medical condition (Alzheimer's disease), it is important to focus on treatments and interventions that can help manage the cogni"
+    },
+    {
+        "request_number": 8,
+        "scenario": "common",
+        "response_time": 4.169977903366089,
+        "response_content": "Based on the patient's details of being a 55-year-old with symptoms of frequent urination, thirst, and having type 2 diabetes, it is important to address the possibility of diabetic retinopathy as a c"
+    },
+    {
+        "request_number": 9,
+        "scenario": "common",
+        "response_time": 5.096951007843018,
+        "response_content": "For the patient with degenerative disc disease experiencing back pain and stiffness, the following treatment options may be considered:\n\n1. Physical Therapy: \"Phase field modelling and simulation of d"
+    },
+    {
+        "request_number": 10,
+        "scenario": "common",
+        "response_time": 6.787992715835571,
+        "response_content": "Based on the patient's details and symptoms (age 20, headache, sensitivity to light, with a history of migraines), the appropriate medical treatment would be to manage the migraine symptoms. Here are "
+    },
+    {
+        "request_number": 11,
+        "scenario": "common",
+        "response_time": 9.33190393447876,
+        "response_content": "Based on the patient's symptoms of headache and dizziness, along with a medical condition of hypertension, it is important to consider potential causes and appropriate treatments. \n\nGiven the context "
+    },
+    {
+        "request_number": 12,
+        "scenario": "common",
+        "response_time": 6.781047821044922,
+        "response_content": "Based on the patient's age (45) and symptoms (cough, fever) along with the medical condition of diabetes, it is important to consider the potential risk factors involved, such as the increased suscept"
+    },
+    {
+        "request_number": 13,
+        "scenario": "common",
+        "response_time": 6.848108768463135,
+        "response_content": "Based on the patient's age of 60, symptoms of chest pain and shortness of breath, and medical condition of coronary artery disease, appropriate medical treatments may include:\n\n1. Medications: Nitrogl"
+    },
+    {
+        "request_number": 14,
+        "scenario": "common",
+        "response_time": 5.379414081573486,
+        "response_content": "Based on the symptoms of abdominal pain and nausea in a 25-year-old patient with irritable bowel syndrome, it is important to consider potential treatments that may help manage these symptoms. \n\nTitle"
+    },
+    {
+        "request_number": 15,
+        "scenario": "common",
+        "response_time": 5.754642009735107,
+        "response_content": "Considering the patient's age of 50, symptoms of joint pain and swelling, and medical condition of rheumatoid arthritis, here are some appropriate medical treatments based on the provided research con"
+    },
+    {
+        "request_number": 16,
+        "scenario": "specific",
+        "response_time": 7.897345066070557,
+        "response_content": "Based on the patient's age, symptoms, and medical conditions, here are some appropriate medical treatments that may be considered based on the research context provided:\n\n1. **For eczema with skin ras"
+    },
+    {
+        "request_number": 17,
+        "scenario": "specific",
+        "response_time": 7.030261754989624,
+        "response_content": "Based on the patient details of being 70 years old with symptoms of memory loss and confusion due to Alzheimer's disease, here are some appropriate medical treatments to consider:\n\n1. Medications: The"
+    },
+    {
+        "request_number": 18,
+        "scenario": "specific",
+        "response_time": 6.334296941757202,
+        "response_content": "Based on the patient's age of 55, symptoms of frequent urination and thirst, and underlying medical condition of type 2 diabetes, it is important to ensure proper management of diabetes to prevent com"
+    },
+    {
+        "request_number": 19,
+        "scenario": "specific",
+        "response_time": 6.746188163757324,
+        "response_content": "Based on the patient details provided (age 40, symptoms of back pain and stiffness, and a medical condition of degenerative disc disease), here are some appropriate medical treatments and recommendati"
+    },
+    {
+        "request_number": 20,
+        "scenario": "specific",
+        "response_time": 7.591377258300781,
+        "response_content": "Based on the patient's age of 20 and symptoms of headache and sensitivity to light, considering the medical condition of migraine, the appropriate medical treatment recommendation would be to manage t"
+    },
+    {
+        "request_number": 21,
+        "scenario": "specific",
+        "response_time": 5.409181118011475,
+        "response_content": "Based on the patient's age, symptoms (headache, dizziness), and medical condition (hypertension), here are some appropriate medical treatments:\n\n1. **Control High Blood Pressure:** Given the patient's"
+    },
+    {
+        "request_number": 22,
+        "scenario": "specific",
+        "response_time": 6.015640020370483,
+        "response_content": "Based on the patient's age of 45, symptoms of cough and fever, and medical condition of diabetes, here are some appropriate medical treatments:\n\n1. For the cough and fever symptoms, it is important to"
+    },
+    {
+        "request_number": 23,
+        "scenario": "specific",
+        "response_time": 7.801066875457764,
+        "response_content": "Based on the patient's age of 60, symptoms of chest pain and shortness of breath, and medical history of coronary artery disease, it is important to consider potential complications related to cardiov"
+    },
+    {
+        "request_number": 24,
+        "scenario": "specific",
+        "response_time": 6.4031360149383545,
+        "response_content": "Based on the patient's symptoms of abdominal pain and nausea, as well as their medical condition of irritable bowel syndrome, it is important to consider possible exacerbating factors such as diet and"
+    },
+    {
+        "request_number": 25,
+        "scenario": "specific",
+        "response_time": 7.869333982467651,
+        "response_content": "For the patient, age 50, experiencing joint pain and swelling due to rheumatoid arthritis, it is essential to focus on both inflammation control and pain management. As mentioned in the research, pain"
+    },
+    {
+        "request_number": 26,
+        "scenario": "specific",
+        "response_time": 7.484762907028198,
+        "response_content": "Based on the patient details provided (Age: 35, Symptoms: skin rash, itching, Medical Condition: eczema), it is important to focus on managing the symptoms of eczema and addressing the skin rash and i"
+    },
+    {
+        "request_number": 27,
+        "scenario": "specific",
+        "response_time": 6.125293970108032,
+        "response_content": "Based on the patient details provided (Age - 70, Symptoms - memory loss, confusion, Medical Conditions - Alzheimer's disease), the appropriate medical treatments may include:\n\n1. Alzheimer's Disease-s"
+    },
+    {
+        "request_number": 28,
+        "scenario": "specific",
+        "response_time": 4.679333925247192,
+        "response_content": "Based on the patient's age, symptoms of frequent urination and thirst, and medical condition of type 2 diabetes, it is important to manage their diabetes effectively to prevent complications such as d"
+    },
+    {
+        "request_number": 29,
+        "scenario": "specific",
+        "response_time": 6.236614227294922,
+        "response_content": "Based on the patient's age of 40, symptoms of back pain and stiffness, and medical condition of degenerative disc disease, the following medical treatments may be considered:\n\n1. Physical therapy: Phy"
+    },
+    {
+        "request_number": 30,
+        "scenario": "specific",
+        "response_time": 5.804213047027588,
+        "response_content": "Based on the patient details provided (Age: 20, Symptoms: headache, sensitivity to light, Medical Condition: migraine), I would recommend the following medical treatments:\n\n1. **Medication for migrain"
+    }
+]
